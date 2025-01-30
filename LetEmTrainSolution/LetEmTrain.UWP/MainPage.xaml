@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="LetEmTrain.UWP.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LetEmTrain.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <NavigationView x:Name="nvMain"  ItemInvoked="nvMain_ItemInvoked"      
+                            IsPaneOpen="True"
+                            OpenPaneLength="250"
+                            CompactPaneLength="40"
+                            Background="Transparent"
+                            IsBackButtonVisible="Visible"
+                            IsSettingsVisible="False"
+                            BackRequested="nvMain_BackRequested"
+                      >
+
+            <NavigationView.PaneCustomContent>
+                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            </NavigationView.PaneCustomContent>
+
+            <NavigationView.MenuItems >
+                <NavigationViewItem x:Name="nvHome" Content="Home Page" Icon="Home" Tag="home"/>
+                <NavigationViewItem x:Name="nvAccount" Content="Account" Icon="Contact" Tag="acc" Visibility="{x:Bind isUser}"/>
+                <NavigationViewItem x:Name="nvChart" Content="Progress Charts" Icon="ThreeBars" Tag="chart" Visibility="{x:Bind isUser}"/>
+                <NavigationViewItem x:Name="nvMaxes" Content="Max Lifts Calculator" Icon="Calculator" Tag="liftCalc" Visibility="{x:Bind isUser}"/>
+                <NavigationViewItem x:Name="nvCalorieCalc" Content="Diet Manager" Icon="Shop" Tag="kcalCalc" Visibility="{x:Bind isUser}"/>
+                <StackPanel>
+                    <TextBlock Text="{x:Bind nvSectionTitle}" FontSize="16" FontWeight="Medium" IsHitTestVisible="False"/>
+                </StackPanel>
+                <NavigationViewItem x:Name="nvMyTemplates" Content="My Templates" Icon="Library" Tag="showTemplate" Visibility="{x:Bind isUser}"/>
+                <NavigationViewItem x:Name="nvFindExercise" Content="Find Exercise" Icon="Find" Tag="findExercise" Visibility="{x:Bind isUser}"/>
+
+                <NavigationViewItem x:Name="nvManageUsers" Content="Manage Users" Icon="People" Tag="mngUsers" Visibility="{x:Bind isAdmin}"/>
+                <NavigationViewItem x:Name="nvManageExercises" Content="Manage Exercises" Icon="ViewAll" Tag="mngExercises" Visibility="{x:Bind isAdmin}"/>
+            </NavigationView.MenuItems>
+            <NavigationView.PaneFooter>
+                <StackPanel>
+                    <NavigationViewItem x:Name="nvLogout" Content="Logout" Icon="NewWindow" Tapped="nvLogout_Tapped"/>
+                </StackPanel>
+            </NavigationView.PaneFooter>
+
+
+            <Frame x:Name="frmMain">
+
+            </Frame>
+
+        </NavigationView>
+    </Grid>
+</Page>

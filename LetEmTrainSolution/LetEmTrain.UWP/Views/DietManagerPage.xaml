@@ -1,0 +1,98 @@
+﻿<Page
+    x:Class="LetEmTrain.UWP.Views.DietManagerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LetEmTrain.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="#ECE9F1">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="500" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="#5C5470">
+            <TextBlock Text="LET'EM TRAIN"
+                VerticalAlignment="Center"
+                FontSize="32"
+                Foreground="White"
+                FontStyle="Italic"
+                Padding="20 14"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="Calorie Intake Calculator" 
+                       HorizontalAlignment="Center"
+                        FontSize="40"
+                        Padding="20"
+                        FontWeight="Medium"/>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Margin="20">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                    
+                    <TextBlock Text="AGE: " FontWeight="Medium" VerticalAlignment="Center" TextAlignment="Center" Width="120" Padding="10"/>
+                    <TextBox x:Name="agetxt" CornerRadius="15" Width="300" Height="40"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                    <TextBlock Text="HEIGHT: " FontWeight="Medium" VerticalAlignment="Center" TextAlignment="Center" Width="120" Padding="10"/>
+                    <TextBox x:Name="heighttxt" CornerRadius="15" Width="300" Height="40"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                    <TextBlock Text="WEIGHT: " FontWeight="Medium" VerticalAlignment="Center" TextAlignment="Center"  Width="120" Padding="10"/>
+                    <TextBox x:Name="weighttxt" CornerRadius="15" Width="300" Height="40"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                    <TextBlock Text="ACTIVITY LEVEL: " FontWeight="Medium" VerticalAlignment="Center" TextAlignment="Center" Width="120" Padding="10"/>
+                    <ComboBox x:Name="activitylvl" CornerRadius="15" Width="300" Height="40">
+                        <ComboBoxItem Content="1 - Sedentary" />
+                        <ComboBoxItem Content="2 - Lightly active" />
+                        <ComboBoxItem Content="3 - Moderately active" />
+                        <ComboBoxItem Content="4 - Very active" />
+                        <ComboBoxItem Content="5 - Extra active" />
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                    <TextBlock Text="GOAL: " FontWeight="Medium" VerticalAlignment="Center" TextAlignment="Center" Width="120" Padding="10" />
+                    <RadioButton x:Name="goal1" Tag="1" Content="CUT" GroupName="goal" Width="100" Height="40"  Margin="10" Checked="RadioButtongoal_Checked" />
+                    <RadioButton x:Name="goal2" Tag="2"  Content="SMALL CUT" GroupName="goal" Width="100" Height="40"  Margin="10" Checked="RadioButtongoal_Checked"/>
+                    <RadioButton x:Name="goal3" Tag="3"  Content="MAINTAIN" GroupName="goal" Width="130" Height="40" Margin="10" Checked="RadioButtongoal_Checked"/>
+                    <RadioButton x:Name="goal4" Tag="4" Content=" SMALL BULK" GroupName="goal" Width="100" Height="40" Margin="10" Checked="RadioButtongoal_Checked" />
+                    <RadioButton x:Name="goal5" Tag="5" Content="BULK" GroupName="goal" Width="100" Height="40" Margin="10" Checked="RadioButtongoal_Checked"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10 0" HorizontalAlignment="Center">
+                    <TextBlock Text="DIET TYPE: " FontWeight="Medium" VerticalAlignment="Center" TextAlignment="Center" Width="120" Padding="10" />
+                    <RadioButton x:Name="standard" Tag="standard" Content="STANDARD" GroupName="diet" Width="100" Height="40"  Margin="10" Checked="RadioButtondiet_Checked"/>
+                    <RadioButton x:Name="highProtein" Tag="high-protein" Content="HIGH-PROTEIN" GroupName="diet" Width="130" Height="40"  Margin="10" Checked="RadioButtondiet_Checked"/>
+                    <RadioButton x:Name="keto" Tag="keto" Content="KETO" GroupName="diet" Width="100" Height="40"  Margin="10"  Checked="RadioButtondiet_Checked"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                    <Button x:Name="calculate" Content="CALCULATE" Background="#5C5470" Foreground="White" Margin="10" Width="120" Height="40" Click="calculate_Click"/>
+                    <Button x:Name="import" Content="IMPORT FROM PROFILE"  Background="#5C5470" Foreground="White" Margin="10" Width="180" Height="40" Click="import_Click" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="2">
+            <Ellipse Width="200" Height="200" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 25" >
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="ms-appx:///Assets/logo.jpg" Stretch="UniformToFill"  />
+                </Ellipse.Fill>
+            </Ellipse>
+        </Grid>
+        <Grid Grid.Row="4"  ColumnSpan="3" BorderBrush="Black" BorderThickness="0 1 0 0" Margin="50 0">
+            <TextBlock Margin="0 20" x:Name="calories" TextAlignment="Center" FontSize="20" LineHeight="40"/>
+        </Grid>
+
+    </Grid>
+</Page>

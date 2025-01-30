@@ -1,0 +1,141 @@
+﻿<Page x:Class="LetEmTrain.UWP.Views.WorkoutTemplates.MyTemplatesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:local="using:LetEmTrain.Domain.Models"
+      xmlns:viewModels="using:LetEmTrain.UWP.ViewModels"
+      mc:Ignorable="d"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <viewModels:WorkoutPlanViewModel />
+    </Page.DataContext>
+
+
+    <Grid Background="#ECE9F1">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" VerticalAlignment="Top" Background="#5C5470">
+            <TextBlock Text="MY TEMPLATES"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="32"
+                       Foreground="White"
+                       FontStyle="Italic"
+                       Padding="20" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <!-- Search Box -->
+            <AutoSuggestBox x:Name="asbWorkOutPlans"
+                    PlaceholderText="Find workout plan ..."
+                    QueryIcon="Find"
+                    Width="400"
+                    VerticalAlignment="Center"
+                    Text="{x:Bind WorkoutPlanViewModel.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    TextChanged="asbWorkOutPlans_TextChanged"
+                    QuerySubmitted="asbWorkOutPlans_QuerySubmitted"
+                    SuggestionChosen="asbWorkOutPlans_SuggestionChosen"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Button 
+                Click="ButtonAdd_Click"
+                Background="#5C5470"
+                Foreground="White"
+                BorderBrush="Transparent"
+                HorizontalAlignment="Center"
+                Margin="10">
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Create New Template " Margin="5"/>
+                    <SymbolIcon Symbol="Add"/>
+                    </StackPanel>
+                </Button>
+        </Grid>
+        
+        <Grid Grid.Row="3">
+        <StackPanel x:Name="PlaceholderMessage" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,70,0,0">
+                <TextBlock Text = "{x:Bind WorkoutPlanViewModel.Placeholder, Mode=OneWay}"
+                       FontSize="18"
+                       FontStyle="Italic"
+                       Foreground="Gray"
+                       TextAlignment="Center" />
+        </StackPanel>
+
+        <GridView x:Name="TemplateGrid"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Top"
+                  Margin="10,10,10,10"
+                  IsItemClickEnabled="False"
+                  SelectionMode="None"
+                  ItemsSource="{x:Bind WorkoutPlanViewModel.WorkoutPlans}">
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>    
+                    <ItemsWrapGrid Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="Margin" Value="10"/>
+                </Style>
+
+            <!-- Listing existing workout plans -->
+            </GridView.ItemContainerStyle>
+            <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="local:WorkoutPlan">
+                    <Grid Width="270" Height="230">
+                        <Border Background="White" BorderBrush="#5C5470" BorderThickness="1" CornerRadius="10">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Margin="10,5" Grid.Row="0">
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="14" TextAlignment="Center" Margin="0,5"/>
+                                    <TextBlock Text="{Binding Description}" TextWrapping="WrapWholeWords" FontSize="12" TextAlignment="Center"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,5">
+                                    <Button Content="View Sets"  
+                                            Click="ButtonViewSets"
+                                            Background="#5C5470" 
+                                            Foreground="White" 
+                                            BorderBrush="Transparent" 
+                                            Width="120" 
+                                            Height="40" 
+                                            Margin="5"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,5,0,10">
+                                        <!-- Edit workout plans -->
+                                        <Button Content="Edit Template"
+                                            Click="ButtonEditTemplate"
+                                            Background="#5C5470" 
+                                            Foreground="White" 
+                                            BorderBrush="Transparent" 
+                                            Width="120" 
+                                            Height="40" 
+                                            Margin="5"/>
+                                        <!-- Delete workout plan -->
+                                        <Button Content="Delete Template" 
+                                            Click="ButtonDeleteTemplate"
+                                            Background="MediumVioletRed"
+                                            Foreground="White" 
+                                            BorderBrush="Transparent" 
+                                            Width="120" 
+                                            Height="40" 
+                                            Margin="5"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+    </Grid>
+    </Grid>
+</Page>
