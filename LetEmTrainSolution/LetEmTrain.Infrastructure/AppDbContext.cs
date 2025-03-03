@@ -4,6 +4,7 @@ using System.IO;
 using LetEmTrain.Domain.Models;
 using System.Collections.Generic;
 using LetEmTrain.Domain.SeedWork;
+using Microsoft.Extensions.Configuration;
 
 namespace LetEmTrain.Infrastructure
 {
@@ -27,15 +28,21 @@ namespace LetEmTrain.Infrastructure
 
         //LOCAL DB PATH
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseSqlite($"Data Source={DbPath}");
+            => options.UseSqlite($"Data Source={DbPath}");
 
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        var configuration = new ConfigurationBuilder()
+        //            .SetBasePath(Directory.GetCurrentDirectory())
+        //            .AddJsonFile("appsettings.json")
+        //            .Build();
 
-        /*  CLOUD
-         *  protected override void OnConfiguring(DbContextOptionsBuilder options)
-              => options.UseSqlServer("Server=tcp:letthemtrainserver.database.windows.net,1433;" +
-                  "Initial Catalog=LetThemTrainDb;Persist Security Info=False;User ID=LetThemTrainAdmin;" +
-                  "Password=LetThemTrain2024@;MultipleActiveResultSets=False;" +
-                  "Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");*/
+        //        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        //        optionsBuilder.UseNpgsql(connectionString);
+        //    }
+        //}
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
